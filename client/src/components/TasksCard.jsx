@@ -5,7 +5,7 @@ export default function TasksCard() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-      async function loadTasks(){
+      const loadTasks = async () => {
         const {data} = await getAllTasks();
         console.log('Cargando', data);
         setTasks(data);  

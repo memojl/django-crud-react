@@ -7,7 +7,7 @@ export default function Navigation() {
         <h1>Tasks App</h1>
         <Link to="/">Home</Link> | 
         <Link to="/tasks">Tasks</Link> | 
-        <Link to="/tasks-create">Task Create</Link>
+        <Link to="/tasks-create">Task Add</Link>
     </div>
   )
 }
