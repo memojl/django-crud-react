@@ -1,6 +1,11 @@
 import axios from 'axios'
-import { apiGetTask } from './const';
+import { apiUrlTask } from './const';
 
-export const getAllTasks = ()=>{
-    return axios.get(apiGetTask);
-}
+const tasksApi = axios.create({
+    baseURL: apiUrlTask
+});
+
+export const getAllTasks = ()=> tasksApi.get('/');
+export const createTasks = (task)=> tasksApi.post('/',task);
+export const editTasks = (task)=> tasksApi.put('/',task);
+export const deleteTasks = (id)=> tasksApi.delete(`/${id}`);
