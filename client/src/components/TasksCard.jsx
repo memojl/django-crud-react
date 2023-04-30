@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react'
-import { getAllTasks, deleteTasks } from '../api/tasks.api';
+import { getAllTasks, getTasks, deleteTasks } from '../api/tasks.api';
 import {useNavigate} from 'react-router-dom'
 
 export default function TasksCard() {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
 
+  const loadTasks = async () => {
+    const {data} = await getAllTasks();
+    console.log('Cargando', data);
+    setTasks(data);  
+  }
+
   useEffect(() => {
-    const loadTasks = async () => {
-      const {data} = await getAllTasks();
-      console.log('Cargando', data);
-      setTasks(data);  
-    }
     loadTasks();
   }, []);
   
@@ -25,8 +26,10 @@ export default function TasksCard() {
               <button onClick={async ()=>{
                 const acept = window.confirm('Estas seguro de eliminar esta tarea?');
                 if(acept){
-                  await deleteTasks(task.id);
-                  window.location.reload();
+                  const res = await deleteTasks(task.id);
+                  //if(res){
+                    loadTasks();//window.location.reload();
+                  //}
                 }
               }}>Eliminar</button>
             </div>

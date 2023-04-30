@@ -6,6 +6,7 @@ const tasksApi = axios.create({
 });
 
 export const getAllTasks = ()=> tasksApi.get('/');
+export const getTasks = (id)=> tasksApi.get(`/${id}/`);
 export const createTasks = (task)=> tasksApi.post('/',task);
-export const editTasks = (task)=> tasksApi.put('/',task);
-export const deleteTasks = (id)=> tasksApi.delete(`/${id}`);
+export const deleteTasks = (id)=> tasksApi.delete(`/${id}/`);
+export const updateTasks = (id,task)=> tasksApi.put(`/${id}/`,task);
