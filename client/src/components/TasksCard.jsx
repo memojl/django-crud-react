@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { getAllTasks, getTasks, deleteTasks } from '../api/tasks.api';
 import {useNavigate} from 'react-router-dom'
+import { toast } from 'react-hot-toast';
 
 export default function TasksCard() {
   const navigate = useNavigate();
@@ -26,10 +27,11 @@ export default function TasksCard() {
               <button onClick={async ()=>{
                 const acept = window.confirm('Estas seguro de eliminar esta tarea?');
                 if(acept){
-                  const res = await deleteTasks(task.id);
-                  //if(res){
+                  const res = await deleteTasks(task.id); //console.log(res);
+                  if(res.status == 204){
                     loadTasks();//window.location.reload();
-                  //}
+                    toast.success('Tarea Borrada');
+                  }
                 }
               }}>Eliminar</button>
             </div>
